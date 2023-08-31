@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const sugarpSlice = createSlice({
-  name: "dashboard",
+  name: "sugarp",
   initialState: {
     example: [],
   },
