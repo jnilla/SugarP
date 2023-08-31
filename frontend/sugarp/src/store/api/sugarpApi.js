@@ -21,7 +21,7 @@ export const sugarpApi = createApi({
 
     // Examples Query (GET)
     getExampleGet: builder.query({
-      query: () => `pokemon?limit=100`,
+      query: () => `pokemon?limit=10`,
     }),
   }),
 });
