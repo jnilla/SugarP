@@ -4,9 +4,18 @@ import { useGetExampleGetQuery } from "@/store/api/sugarpApi";
 import { useDispatch, useSelector } from "react-redux";
 import { getExample } from "@/store/thunks";
 import Loading from "./Loading";
+import Link from "next/link";
 
 const columns = [
-  { field: "title", headerName: "Title", width: 130, sortable: false },
+  {
+    field: "title",
+    headerName: "Title",
+    width: 130,
+    sortable: false,
+    renderCell: (params) => (
+      <Link href={`projects/${params.row.id}`}>{params.row.title}</Link>
+    ),
+  },
   {
     field: "description",
     headerName: "Description",

@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import Users from "../components/Users";
 import Paginator from "../components/Paginator";
 import Loading from "../components/Loading";
-import ControlBar from "../components/ControlBar";
-import { Typography } from "@mui/material";
 import { useGetExampleGetQuery } from "@/store/api/sugarpApi";
 import { useDispatch } from "react-redux";
 import { getExample } from "@/store/thunks";
+import ControlForm from "../components/ControlForm";
+import UserForm from "../components/UserForm";
 
-export default function UsersPage() {
+export default function UserPage() {
   //* Obtener datos de la API
   const { data, error, isLoading, isSuccess } = useGetExampleGetQuery();
   const dataProjects = data?.results;
@@ -23,18 +22,8 @@ export default function UsersPage() {
 
   return (
     <>
-      <Typography variant='h2' gutterBottom>
-        Users
-      </Typography>
-      <ControlBar />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Users />
-          <Paginator />
-        </>
-      )}
+      <ControlForm />
+      {isLoading ? <Loading /> : <UserForm />}
     </>
   );
 }

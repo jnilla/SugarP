@@ -31,7 +31,6 @@ export default function Home() {
 
   //Obtener datos del store
   const example = useSelector((state) => state.sugarp.example);
-  console.log(example);
 
   return (
     <Box sx={{ display: "flex" }}>
