@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { getExample } from "@/store/thunks";
 import ControlBar from "../components/ControlBar";
 import { Typography } from "@mui/material";
+import Paginator from "../components/Paginator";
+import Loading from "../components/Loading";
 
 export default function ProjectsPage() {
   //* Obtener datos de la API
@@ -25,7 +27,15 @@ export default function ProjectsPage() {
         Projects
       </Typography>
       <ControlBar />
-      <Projects />
+
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Projects />
+          <Paginator />
+        </>
+      )}
     </>
   );
 }

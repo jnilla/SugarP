@@ -50,25 +50,19 @@ export default function Projects({ children }) {
   // }));
 
   return (
-    <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          disableRowSelectionOnClick
-          disableDensitySelector
-          disableColumnSelector
-          disableColumnFilter
-          disableColumnMenu
-          disableVirtualization
-          filterPanelDeleteIcon
-          autoHeight
-          hideFooter
-          columnVisibilityModel
-        />
-      )}
-    </>
+    <DataGrid
+      rows={rows}
+      columns={columns}
+      disableRowSelectionOnClick
+      disableDensitySelector
+      disableColumnSelector
+      disableColumnFilter
+      disableColumnMenu
+      disableVirtualization
+      filterPanelDeleteIcon
+      autoHeight
+      hideFooter
+      columnVisibilityModel
+    />
   );
 }
