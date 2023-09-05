@@ -1,56 +1,74 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { useGetExampleGetQuery } from "@/store/api/sugarpApi";
+import { useDispatch, useSelector } from "react-redux";
+import { getExample } from "@/store/thunks";
+import Loading from "./Loading";
 
 const columns = [
-  { field: "firstName", headerName: "First name", width: 130, sortable: false },
-  { field: "lastName", headerName: "Last name", width: 130, sortable: false },
+  { field: "title", headerName: "Title", width: 130, sortable: false },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
+    field: "description",
+    headerName: "Description",
+    width: 130,
+    sortable: false,
+  },
+  {
+    field: "status",
+    headerName: "Status",
     width: 90,
     sortable: false,
   },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    sortable: false,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-  { field: "id", headerName: "ID", width: 70, sortable: false },
+  { field: "id", type: "number", headerName: "ID", width: 70, sortable: false },
 ];
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 1, description: "Snow", title: "Jon", status: "active" },
+  { id: 2, description: "Lannister", title: "Cersei", status: "active" },
+  { id: 3, description: "Lannister", title: "Jaime", status: "active" },
+  { id: 4, description: "Stark", title: "Arya", status: "active" },
+  { id: 5, description: "Targaryen", title: "Daenerys", status: "active" },
+  { id: 6, description: "Melisandre", title: "Arya", status: "active" },
+  { id: 7, description: "Clifford", title: "Ferrara", status: "active" },
+  { id: 8, description: "Frances", title: "Rossini", status: "active" },
+  { id: 9, description: "Roxie", title: "Harvey", status: "active" },
 ];
 
-export default function Projects() {
+export default function Projects({ children }) {
+  //* Hook para cargar stados de la api
+  const { isLoading, isSuccess } = useGetExampleGetQuery();
+
+  //* Obtener datos del store
+  const { example: dataProjects } = useSelector((state) => state.sugarp);
+
+  //*   Mapear los datos de la api
+  // const mappedProjects = dataProjects.map((project) => ({
+  //   id: "0",
+  //   title: project.name,
+  //   description: project.url,
+  //   status: "ACTIVE",
+  // }));
+
   return (
-    <DataGrid
-      rows={rows}
-      columns={columns}
-      disableRowSelectionOnClick
-      disableDensitySelector
-      disableColumnSelector
-      disableColumnFilter
-      disableColumnMenu
-      disableVirtualization
-      filterPanelDeleteIcon
-      autoHeight
-      hideFooter
-      columnVisibilityModel
-    />
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          disableRowSelectionOnClick
+          disableDensitySelector
+          disableColumnSelector
+          disableColumnFilter
+          disableColumnMenu
+          disableVirtualization
+          filterPanelDeleteIcon
+          autoHeight
+          hideFooter
+          columnVisibilityModel
+        />
+      )}
+    </>
   );
 }
