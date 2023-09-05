@@ -45,7 +45,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function ProjectForm() {
+export default function TicketForm() {
   //* Estilos
   const theme = useTheme();
 
@@ -81,11 +81,15 @@ export default function ProjectForm() {
           value={state.status}
           label='Status'
           onChange={handleChange}
-          defaultValue='Status'
+          defaultValue='New'
           name='status'
         >
-          <MenuItem value='active'>Active</MenuItem>
-          <MenuItem value='inactive'>Inactive</MenuItem>
+          <MenuItem value='new'>New</MenuItem>
+          <MenuItem value='assigned'>Assigned</MenuItem>
+          <MenuItem value='inprog'>In progress</MenuItem>
+          <MenuItem value='pending'>Pending</MenuItem>
+          <MenuItem value='resolved'>Resolved</MenuItem>
+          <MenuItem value='closed'>Closed</MenuItem>
         </Select>
       </FormControl>
 

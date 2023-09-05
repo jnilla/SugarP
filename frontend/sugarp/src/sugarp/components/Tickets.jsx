@@ -4,11 +4,21 @@ import { useGetExampleGetQuery } from "@/store/api/sugarpApi";
 import { useDispatch, useSelector } from "react-redux";
 import { getExample } from "@/store/thunks";
 import Loading from "./Loading";
+import Link from "next/link";
+
 const columns = [
-  { field: "title", headerName: "Title", width: 130, sortable: false },
   {
-    field: "description",
-    headerName: "Description",
+    field: "title",
+    headerName: "Title",
+    width: 130,
+    sortable: false,
+    renderCell: (params) => (
+      <Link href={`tickets/${params.row.id}`}>{params.row.title}</Link>
+    ),
+  },
+  {
+    field: "assignee",
+    headerName: "Assignee",
     width: 130,
     sortable: false,
   },
@@ -22,15 +32,15 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, description: "Snow", title: "Jon", status: "active" },
-  { id: 2, description: "Lannister", title: "Cersei", status: "active" },
-  { id: 3, description: "Lannister", title: "Jaime", status: "active" },
-  { id: 4, description: "Stark", title: "Arya", status: "active" },
-  { id: 5, description: "Targaryen", title: "Daenerys", status: "active" },
-  { id: 6, description: "Melisandre", title: "Arya", status: "active" },
-  { id: 7, description: "Clifford", title: "Ferrara", status: "active" },
-  { id: 8, description: "Frances", title: "Rossini", status: "active" },
-  { id: 9, description: "Roxie", title: "Harvey", status: "active" },
+  { id: 1, assignee: "Snow", title: "Jon", status: "active" },
+  { id: 2, assignee: "Lannister", title: "Cersei", status: "active" },
+  { id: 3, assignee: "Lannister", title: "Jaime", status: "active" },
+  { id: 4, assignee: "Stark", title: "Arya", status: "active" },
+  { id: 5, assignee: "Targaryen", title: "Daenerys", status: "active" },
+  { id: 6, assignee: "Melisandre", title: "Arya", status: "active" },
+  { id: 7, assignee: "Clifford", title: "Ferrara", status: "active" },
+  { id: 8, assignee: "Frances", title: "Rossini", status: "active" },
+  { id: 9, assignee: "Roxie", title: "Harvey", status: "active" },
 ];
 
 export default function Tickets() {
@@ -44,7 +54,7 @@ export default function Tickets() {
   // const mappedProjects = dataProjects.map((project) => ({
   //   id: "0",
   //   title: project.name,
-  //   description: project.url,
+  //   assignee: project.url,
   //   status: "ACTIVE",
   // }));
 

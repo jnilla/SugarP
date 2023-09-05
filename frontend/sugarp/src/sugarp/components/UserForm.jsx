@@ -6,14 +6,22 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useInputsState } from "../hooks/useInputsState";
 
 export default function UserForm() {
-  const [role, setRole] = useState("");
+  //* Manejador de 'state'
+  const { state, handleChange } = useInputsState({
+    name: "",
+    username: "",
+    password: "",
+    role: "",
+  });
 
-  const handleChange = (event) => {
-    setRole(event.target.value);
-  };
+  //* DEBUG
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   return (
     <Box
@@ -31,28 +39,39 @@ export default function UserForm() {
         sx={{ maxWidth: "720px" }}
         label='Name'
         variant='outlined'
+        value={state.name}
+        onChange={handleChange}
+        name='name'
       />
       <TextField
         fullWidth
         sx={{ maxWidth: "720px" }}
         label='Username'
         variant='outlined'
+        value={state.username}
+        onChange={handleChange}
+        name='username'
       />
       <TextField
         fullWidth
         sx={{ maxWidth: "720px" }}
         label='Password'
         variant='outlined'
+        value={state.password}
+        type='password'
+        onChange={handleChange}
+        name='password'
       />
       <FormControl sx={{ maxWidth: "720px" }} fullWidth>
         <InputLabel id='demo-simple-select-label'>Role</InputLabel>
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
-          value={role}
+          value={state.role}
           label='Role'
-          onChange={handleChange}
           defaultValue='Role'
+          onChange={handleChange}
+          name='role'
         >
           <MenuItem value='admin'>Admin</MenuItem>
           <MenuItem value='manager'>Manager</MenuItem>

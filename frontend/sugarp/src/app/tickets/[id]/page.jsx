@@ -1,15 +1,15 @@
 "use client";
 
-import UserPage from "@/sugarp/pages/UserPage";
+import TicketPage from "@/sugarp/pages/TicketPage";
 import { Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useParams } from "next/navigation";
 import React from "react";
 
-export default function UserByID() {
+export default function TicketByID() {
   const params = useParams();
-  const { id: UserID } = params;
+  const { id: ticketID } = params;
 
   //   console.log(router);
   //   console.log(pathname);
@@ -18,9 +18,9 @@ export default function UserByID() {
   return (
     <>
       <Typography variant='h2' gutterBottom>
-        ID User: {UserID}
+        ID Ticket: {ticketID}
       </Typography>
-      <UserPage />
+      <TicketPage />
     </>
   );
 }
