@@ -1,11 +1,16 @@
 "use client";
+
 import { useGetExampleGetQuery } from "@/store/api/sugarpApi";
 import { DataGrid } from "@mui/x-data-grid";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 
 export default function Users() {
+  const { data: session, status } = useSession();
+  console.log(session);
+
   const columns = [
     {
       field: "name",
