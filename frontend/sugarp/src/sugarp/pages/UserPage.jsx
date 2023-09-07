@@ -23,7 +23,7 @@ export default function UserPage() {
   return (
     <>
       <ControlForm />
-      {isLoading ? <Loading /> : <UserForm />}
+      <UserForm />
     </>
   );
 }

@@ -1,0 +1,7 @@
+#main,
+.main {
+  background: url("../../public/bg-1.svg"), url("../../public/bg-2.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: top right, left bottom;
+  background-size: 30%, 50%;
+}

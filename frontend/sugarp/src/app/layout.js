@@ -1,18 +1,14 @@
 "use client";
+
 import { Provider } from "react-redux";
-import "./globals.css";
 import { Inter } from "next/font/google";
 import { store } from "@/store/store";
-import Box from "@mui/material/Box";
-import HomeIcon from "@mui/icons-material/Home";
-import StarIcon from "@mui/icons-material/Star";
-import ChecklistIcon from "@mui/icons-material/Checklist";
-import SettingsIcon from "@mui/icons-material/Settings";
-import SupportIcon from "@mui/icons-material/Support";
-import LogoutIcon from "@mui/icons-material/Logout";
-import ThemeRegistry from "../../theme/ThemeRegistry";
 import { Menu } from "@/sugarp/components/Menu";
+import { usePathname } from "next/navigation";
+import ThemeRegistry from "../../theme/ThemeRegistry";
+import Box from "@mui/material/Box";
 import ProvidersNextAuth from "./Providers";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +18,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <ProvidersNextAuth>
-          <Provider store={store}>
+        <Provider store={store}>
+          <ProvidersNextAuth>
             <ThemeRegistry>
-              <Menu />
               <Box
                 component='main'
                 sx={{
@@ -39,11 +36,12 @@ export default function RootLayout({ children }) {
                   p: 3,
                 }}
               >
+                {pathname === "/api/auth/signin" ? <div></div> : <Menu />}
                 {children}
               </Box>
             </ThemeRegistry>
-          </Provider>
-        </ProvidersNextAuth>
+          </ProvidersNextAuth>
+        </Provider>
       </body>
     </html>
   );

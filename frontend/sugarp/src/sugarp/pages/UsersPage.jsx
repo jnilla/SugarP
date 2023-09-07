@@ -27,14 +27,9 @@ export default function UsersPage() {
         Users
       </Typography>
       <ControlBar />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Users />
-          <Paginator />
-        </>
-      )}
+
+      <Users />
+      <Paginator />
     </>
   );
 }

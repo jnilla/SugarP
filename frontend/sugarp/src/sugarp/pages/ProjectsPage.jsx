@@ -28,14 +28,8 @@ export default function ProjectsPage() {
       </Typography>
       <ControlBar />
 
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Projects />
-          <Paginator />
-        </>
-      )}
+      <Projects />
+      <Paginator />
     </>
   );
 }

@@ -23,8 +23,11 @@ import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 import Link from "next/link";
 import Groups2RoundedIcon from "@mui/icons-material/Groups2Rounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import SugarpImgWhite from "../../../public/sugarpWhite.png";
 import Image from "next/image";
+import { Button } from "@mui/material";
+import { signOut } from "next-auth/react";
 
 const MenuItem = [
   { title: "Home", icon: <DashboardRoundedIcon />, url: "/" },
@@ -247,6 +250,37 @@ export const Menu = () => {
               </ListItem>
             </Link>
           ))}
+        </List>
+        <Divider />
+        <List>
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                  onClick={() => signOut()}
+                >
+                  <LogoutRoundedIcon />
+                </Button>
+              </ListItemIcon>
+              <ListItemText primary='Logout' sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </>

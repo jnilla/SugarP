@@ -22,7 +22,7 @@ export default function ProjectPage() {
   return (
     <>
       <ControlForm />
-      {isLoading ? <Loading /> : <ProjectForm />}
+      <ProjectForm />
     </>
   );
 }

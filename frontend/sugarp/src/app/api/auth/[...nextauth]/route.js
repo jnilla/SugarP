@@ -18,7 +18,14 @@ const handler = NextAuth({
           credentials.username === "develpz" &&
           credentials.password === "develpz#060680"
         ) {
-          const user = { id: 1, name: "John Smith", email: "jsmith@example" };
+          const user = {
+            id: 1,
+            name: "Elias Lopez",
+            username: "develpz",
+            email: "develpz@example",
+            role: "admin",
+            image: "https://avatars.githubusercontent.com/u/6582884?v=4",
+          };
           return user;
         }
         return null;
@@ -38,7 +45,7 @@ const handler = NextAuth({
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: "/api/auth/signin",
   },
 });
 

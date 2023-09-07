@@ -1,22 +1,16 @@
-"use client";
-import styles from "./page.module.css";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getExample } from "@/store/thunks";
-import { useSelector } from "react-redux";
-import { useGetExampleGetQuery } from "@/store/api/sugarpApi";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
-import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import MediaCard from "../sugarp/components/MediaCard.jsx";
-import { Skeleton } from "@mui/material";
+import Loading from "./Loading.jsx";
+import { useGetExampleGetQuery } from "@/store/api/sugarpApi.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getExample } from "@/store/thunks.js";
+import MediaCard from "./MediaCard.jsx";
 
-export default function Home() {
+export default function Dashboard() {
   // Obtener datos de la api
   const { data, error, isLoading, isSuccess } = useGetExampleGetQuery();
   const results = data?.results;
@@ -46,14 +40,7 @@ export default function Home() {
         </Typography>
         <Grid container rowSpacing={3} columnSpacing={3}>
           {isLoading ? (
-            <Grid container rowSpacing={3} columnSpacing={3}>
-              <Grid xs={6}>
-                <Skeleton variant='rectangular' width={640} height={345} />
-              </Grid>
-              <Grid xs={6}>
-                <Skeleton variant='rectangular' width={640} height={345} />
-              </Grid>
-            </Grid>
+            <Loading />
           ) : (
             example?.map((item) => (
               <Grid xs={6} key={item.id}>
