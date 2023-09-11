@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from "react";
 import { useGetExampleGetQuery } from "@/store/api/sugarpApi";
 import { useDispatch } from "react-redux";

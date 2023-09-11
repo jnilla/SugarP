@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { Inter } from "next/font/google";
 import { store } from "@/store/store";
 import { Menu } from "@/sugarp/components/Menu";
-import { usePathname } from "next/navigation";
 import ThemeRegistry from "../../theme/ThemeRegistry";
 import Box from "@mui/material/Box";
 import ProvidersNextAuth from "./Providers";
@@ -18,7 +17,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname();
+  // const pathname = window.location.pathname;
+  // console.log(pathname);
 
   return (
     <html lang='en'>
@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
                   p: 3,
                 }}
               >
-                {pathname === "/api/auth/signin" ? <div></div> : <Menu />}
+                <Menu />
                 {children}
               </Box>
             </ThemeRegistry>

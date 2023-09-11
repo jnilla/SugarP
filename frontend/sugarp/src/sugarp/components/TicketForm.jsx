@@ -12,8 +12,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useInputsState } from "../hooks/useInputsState";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 //* Configuracion de ReactQuill
 const modules = {
@@ -146,16 +144,7 @@ export default function TicketForm() {
         />
 
         <Box sx={{ maxWidth: "720px", marginBottom: "1rem" }} fullWidth>
-          <ReactQuill
-            theme='snow'
-            value={note}
-            onChange={setNote}
-            name='note'
-            modules={modules}
-            formats={formats}
-            placeholder='Write your note here...'
-            style={{ height: "300px" }}
-          />
+    
         </Box>
       </Grid>
 

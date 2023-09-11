@@ -253,34 +253,34 @@ export const Menu = () => {
         </List>
         <Divider />
         <List>
-          <ListItem disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+          <Link
+            href='login'
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <Button
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
                   }}
-                  onClick={() => signOut()}
                 >
                   <LogoutRoundedIcon />
-                </Button>
-              </ListItemIcon>
-              <ListItemText primary='Logout' sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+                </ListItemIcon>
+                <ListItemText primary='Logout' sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
     </>

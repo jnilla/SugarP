@@ -1,0 +1,23 @@
+## Begin -SEF Section.
+#
+
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^([^\.]+)$ $1.html [NC,L]
+#Header set X-Content-Type-Options "nosniff"
+#
+## End - SEF Section.
+RewriteEngine On
+
+# Redirigir las URL con .html a URLs sin .html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+RewriteRule ^users/([0-9]+)$ users.html?id=$1 [L,QSA]
+RewriteRule ^projects/([0-9]+)$ projects.html?id=$1 [L,QSA]
+RewriteRule ^tickets/([0-9]+)$ tickets.html?id=$1 [L,QSA]
+
+# Agregar la directiva X-Content-Type-Options
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
