@@ -1,40 +1,27 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from "react";
-import { signIn } from "next-auth/react";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import SugarpImg from "../../../public/sugarp.png";
 import Image from "next/image";
 import { useInputsState } from "../hooks/useInputsState";
 import { useRouter } from "next/navigation";
 import Box from "@mui/material/Box";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 export default function Login() {
   const router = useRouter();
   const [error, setError] = useState("");
-
-  const { data: session, status } = useSession();
-  console.log(status);
+  const { startLogin, status } = useAuthStore();
 
   const { state, handleChange } = useInputsState({
     username: "",
     password: "",
-    redirect: false,
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await signIn("credentials", state);
-      console.log(res);
-
-      if (res.error) return setError(res.error);
-      if (res.ok) return router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+  const onSubmit = (event) => {
+    event.preventDefault();
+    startLogin(state);
   };
 
   useEffect(() => {
@@ -83,7 +70,7 @@ export default function Login() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant='contained' color='primary' onClick={handleSubmit}>
+          <Button variant='contained' color='primary' onClick={onSubmit}>
             Login
           </Button>
         </Grid>

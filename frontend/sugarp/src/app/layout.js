@@ -8,6 +8,8 @@ import ThemeRegistry from "../../theme/ThemeRegistry";
 import Box from "@mui/material/Box";
 import ProvidersNextAuth from "./Providers";
 import "./globals.css";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +19,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  // const pathname = window.location.pathname;
-  // console.log(pathname);
+  const url = usePathname();
+  const status = localStorage.getItem("status");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "not-authenticated" || status === null) {
+      router.push("/login");
+    }
+  }, [status]);
 
   return (
     <html lang='en'>
@@ -36,7 +45,7 @@ export default function RootLayout({ children }) {
                   p: 3,
                 }}
               >
-                <Menu />
+                {url === "/login" || status != "authenticated" ? "" : <Menu />}
                 {children}
               </Box>
             </ThemeRegistry>

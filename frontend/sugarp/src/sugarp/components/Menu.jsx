@@ -28,6 +28,7 @@ import SugarpImgWhite from "../../../public/sugarpWhite.png";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import { signOut } from "next-auth/react";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 const MenuItem = [
   { title: "Home", icon: <DashboardRoundedIcon />, url: "/" },
@@ -112,7 +113,7 @@ const Drawer = styled(MuiDrawer, {
 
 export const Menu = () => {
   const theme = useTheme();
-
+  const { startLogout } = useAuthStore();
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -253,34 +254,28 @@ export const Menu = () => {
         </List>
         <Divider />
         <List>
-          <Link
-            href='login'
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
+                <Button onClick={startLogout} color='error'>
                   <LogoutRoundedIcon />
-                </ListItemIcon>
-                <ListItemText primary='Logout' sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+                </Button>
+              </ListItemIcon>
+              <ListItemText primary='Logout' sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </>
